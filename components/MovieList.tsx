@@ -1,7 +1,7 @@
 import { List } from "antd";
 import React, { useEffect, useState } from "react";
 import { Movie } from "../interfaces";
-import { getMovies } from "./api";
+import { getMovies } from "../utils/api";
 import MovieItem from "./MovieItem";
 
 function MovieList() {

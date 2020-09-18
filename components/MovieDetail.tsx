@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MovieDetail } from "../interfaces";
-import { getMovie } from "./api";
+import { getMovie } from "../utils/api";
 
 import styled from "styled-components";
 import Loading from "./Loading";
