@@ -1,17 +1,31 @@
 import { List } from "antd";
+import { RadioChangeEvent } from "antd/lib/radio";
 import React, { useEffect, useState } from "react";
 import { Movie } from "../interfaces";
 import { getMovies } from "../utils/api";
 import MovieItem from "./MovieItem";
+import SortMovies from "./SortMovies";
 
 function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [sort, setSort] = useState("");
 
-  const getData = async () => {
+  const onChangeSort = (event: RadioChangeEvent) => {
+    setSort(event.target.value);
+    getData(event.target.value, true);
+  };
+
+  const getData = async (sort: string = "", isClean: boolean = false) => {
     setIsLoading(true);
-    const [data, error] = await getMovies(movies.length / 4 + 1);
+    let nextPage;
+    if (!isClean) {
+      nextPage = movies.length / 4 + 1;
+    } else {
+      nextPage = 1;
+    }
+    const [data, error] = await getMovies(nextPage, sort);
 
     const movieArray: Movie[] = data.map((v: any) => ({
       id: v.id,
@@ -20,7 +34,11 @@ function MovieList() {
       summary: v.summary,
       medium_cover_image: v.medium_cover_image,
     }));
-    setMovies([...movies, ...movieArray]);
+    if (!isClean) {
+      setMovies([...movies, ...movieArray]);
+    } else {
+      setMovies([...movieArray]);
+    }
     setError(error);
     setIsLoading(false);
   };
@@ -36,7 +54,11 @@ function MovieList() {
         document.documentElement.scrollHeight - 50
       ) {
         if (!isLoading) {
-          getData();
+          if (sort === "") {
+            getData();
+          } else {
+            getData(sort);
+          }
         }
       }
     }
@@ -48,6 +70,7 @@ function MovieList() {
 
   return (
     <>
+      <SortMovies sort={sort} onChangeSort={onChangeSort} />
       <List
         dataSource={movies}
         renderItem={(movie) => (

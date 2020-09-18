@@ -11,6 +11,7 @@ const api = axios.create({
 
 export const getMovies = async (
   page = 1,
+  sort: string = "",
   limit: number = 4,
   rating: number = 0
 ) => {
@@ -24,6 +25,7 @@ export const getMovies = async (
         limit,
         minimum_rating: rating,
         page,
+        sort_by: sort,
       },
     });
     return [movies, null];
