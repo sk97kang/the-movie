@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { MovieDetail } from "../interfaces";
 import { getMovie } from "./api";
 
 import styled from "styled-components";
-import { Rate } from "antd";
 import Loading from "./Loading";
+import Rating from "./Rating";
+import Title from "./Title";
 
 const Container = styled.div`
   display: flex;
@@ -26,12 +26,6 @@ const TopContent = styled.div`
   justify-content: space-between;
 `;
 
-const Title = styled.div`
-  font-weight: 700;
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
 const Like = styled.div`
   margin-bottom: 5px;
 `;
@@ -42,15 +36,11 @@ const Download = styled.div`
 
 const Description = styled.div``;
 
-const Rating = styled.div`
-  min-width: 150px;
-  margin-left: 10px;
-`;
+type Props = {
+  id: number;
+};
 
-function MovieDetailComp() {
-  const router = useRouter();
-  const { id } = router.query;
-
+function MovieDetailComp({ id }: Props) {
   const [movie, setMovie] = useState<MovieDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -86,10 +76,8 @@ function MovieDetailComp() {
       <Poster src={movie.large_cover_image} />
       <Content>
         <TopContent>
-          <Title>{movie.title_long}</Title>
-          <Rating>
-            <Rate disabled value={movie.rating / 2} />
-          </Rating>
+          <Title title={movie.title_long} />
+          <Rating disabled value={movie.rating} />
         </TopContent>
         <Like>Like : {movie.like_count}</Like>
         <Download>Download : {movie.download_count}</Download>
