@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Title from "./Title";
 import Rating from "./Rating";
+import Year from "./Year";
 
 const Container = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ function MovieItem({ movie }: Props) {
           <Title title={movie.title} />
           <Rating disabled value={movie.rating} />
         </TopContent>
+        <Year text={movie.year} />
         <Summary>{movie.summary}</Summary>
         <Link href={`movie/[id]`} as={`movie/${movie.id}`}>
           <More>자세히 보기</More>

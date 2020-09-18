@@ -33,6 +33,7 @@ function MovieList() {
       rating: v.rating,
       summary: v.summary,
       medium_cover_image: v.medium_cover_image,
+      year: v.year,
     }));
     if (!isClean) {
       setMovies([...movies, ...movieArray]);

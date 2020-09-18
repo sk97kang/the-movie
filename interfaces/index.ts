@@ -6,6 +6,7 @@ export type Movie = {
   rating: number;
   summary: string;
   medium_cover_image: string;
+  year: string;
 };
 
 export type MovieDetail = {
