@@ -33,14 +33,18 @@ export const getMovies = async (
 };
 
 export const getMovie = async (id: number) => {
-  const {
-    data: {
-      data: { movie },
-    },
-  } = await api(MOVIE_DETAILS_URL, {
-    params: {
-      movie_id: id,
-    },
-  });
-  return movie;
+  try {
+    const {
+      data: {
+        data: { movie },
+      },
+    } = await api(MOVIE_DETAILS_URL, {
+      params: {
+        movie_id: id,
+      },
+    });
+    return [movie, null];
+  } catch (error) {
+    return [null, error];
+  }
 };

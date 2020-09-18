@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Col, Menu, Row } from "antd";
 
 const Content = styled(Col)`
-  padding: 30px 0px;
+  margin: 30px 10px;
   width: 100%;
 `;
 
@@ -32,11 +32,11 @@ const Layout = ({ children }: Props) => (
       </Menu.Item>
     </Menu>
     <Row gutter={8}>
-      <Col xs={24} md={4}></Col>
-      <Content xs={24} md={16}>
+      <Col xs={24} md={2} lg={4}></Col>
+      <Content xs={24} md={20} lg={16}>
         {children}
       </Content>
-      <Col xs={24} md={4}></Col>
+      <Col xs={24} md={2} lg={4}></Col>
     </Row>
     <Footer>
       <hr />
