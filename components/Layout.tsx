@@ -5,8 +5,7 @@ import styled from "styled-components";
 import { Col, Menu, Row } from "antd";
 
 const Content = styled(Col)`
-  margin: 30px 10px;
-  width: 100%;
+  padding: 30px 10px;
 `;
 
 const Footer = styled.footer`

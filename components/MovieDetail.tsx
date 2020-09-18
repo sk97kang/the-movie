@@ -77,23 +77,23 @@ function MovieDetailComp() {
     getData();
   }, []);
 
-  if (isLoading) {
+  if (isLoading || movie == null) {
     return <Loading />;
   }
 
   return (
     <Container>
-      <Poster src={movie?.large_cover_image} />
+      <Poster src={movie.large_cover_image} />
       <Content>
         <TopContent>
-          <Title>{movie?.title_long}</Title>
+          <Title>{movie.title_long}</Title>
           <Rating>
-            <Rate disabled value={9 / 2} />
+            <Rate disabled value={movie.rating / 2} />
           </Rating>
         </TopContent>
-        <Like>Like : {movie?.like_count}</Like>
-        <Download>Download : {movie?.download_count}</Download>
-        <Description>{movie?.description_full}</Description>
+        <Like>Like : {movie.like_count}</Like>
+        <Download>Download : {movie.download_count}</Download>
+        <Description>{movie.description_full}</Description>
       </Content>
     </Container>
   );

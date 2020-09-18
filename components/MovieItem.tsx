@@ -3,11 +3,17 @@ import { Movie } from "../interfaces";
 
 import styled from "styled-components";
 import Link from "next/link";
+import { Rate } from "antd";
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0px 10px;
+`;
+
+const TopContent = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Poster = styled.img``;
@@ -29,6 +35,11 @@ const Summary = styled.div`
   font-weight: 400;
 `;
 
+const Rating = styled.div`
+  min-width: 150px;
+  margin-left: 10px;
+`;
+
 const More = styled.a`
   margin-left: auto;
   margin-top: auto;
@@ -46,7 +57,12 @@ function MovieItem({ movie }: Props) {
     <Container>
       <Poster src={movie.medium_cover_image} />
       <Content>
-        <Title>{movie.title}</Title>
+        <TopContent>
+          <Title>{movie.title}</Title>
+          <Rating>
+            <Rate disabled value={movie.rating / 2} />
+          </Rating>
+        </TopContent>
         <Summary>{movie.summary}</Summary>
         <Link href={`movie/[id]`} as={`movie/${movie.id}`}>
           <More>자세히 보기</More>
