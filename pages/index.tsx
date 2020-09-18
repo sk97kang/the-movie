@@ -1,9 +1,7 @@
 import Layout from "../components/Layout";
 
-const IndexPage = () => (
-  <Layout>
-    <h1>Hello Next.js 👋</h1>
-  </Layout>
-);
+function IndexPage() {
+  return <Layout>Index</Layout>;
+}
 
 export default IndexPage;
