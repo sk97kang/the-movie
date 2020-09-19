@@ -12,8 +12,9 @@ const api = axios.create({
 export const getMovies = async (
   page = 1,
   sort: string = "",
-  limit: number = 4,
-  rating: number = 0
+  quality: string = "All",
+  minimumRating: string = "0",
+  limit: number = 4
 ) => {
   try {
     const {
@@ -23,7 +24,8 @@ export const getMovies = async (
     } = await api(LIST_MOVIES_URL, {
       params: {
         limit,
-        minimum_rating: rating,
+        quality,
+        minimum_rating: minimumRating,
         page,
         sort_by: sort,
       },

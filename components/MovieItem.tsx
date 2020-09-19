@@ -10,7 +10,6 @@ import Year from "./Year";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0px 10px;
   width: 100%;
 `;
 

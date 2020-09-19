@@ -3,21 +3,46 @@ import { RadioChangeEvent } from "antd/lib/radio";
 import React, { useEffect, useState } from "react";
 import { Movie } from "../interfaces";
 import { getMovies } from "../utils/api";
+import Filter from "./Filter";
 import MovieItem from "./MovieItem";
 import SortMovies from "./SortMovies";
 
+import styled from "styled-components";
+import Title from "./Title";
+
+const FilterContainer = styled.div`
+  display: flex;
+
+  & > div {
+    margin-right: 10px;
+  }
+`;
+
+const qualityList = ["All", "720p", "1080p", "2160p", "3D"];
+const ratingList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 function MovieList() {
+  const [init, setInit] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [sort, setSort] = useState("");
+  const [quality, setQuality] = useState("All");
+  const [minimumRating, setMinimumRating] = useState("0");
 
   const onChangeSort = (event: RadioChangeEvent) => {
     setSort(event.target.value);
-    getData(event.target.value, true);
   };
 
-  const getData = async (sort: string = "", isClean: boolean = false) => {
+  const onChangeQuality = (value: string) => {
+    setQuality(value);
+  };
+
+  const onChangeMinimumRating = (value: string) => {
+    setMinimumRating(value);
+  };
+
+  const getData = async (isClean: boolean = false) => {
     setIsLoading(true);
     let nextPage;
     if (!isClean) {
@@ -25,8 +50,12 @@ function MovieList() {
     } else {
       nextPage = 1;
     }
-    const [data, error] = await getMovies(nextPage, sort);
-
+    const [data, error] = await getMovies(
+      nextPage,
+      sort,
+      quality,
+      minimumRating
+    );
     const movieArray: Movie[] = data.map((v: any) => ({
       id: v.id,
       title: v.title,
@@ -45,8 +74,13 @@ function MovieList() {
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (!init) {
+      getData();
+      setInit(true);
+    } else {
+      getData(true);
+    }
+  }, [sort, quality, minimumRating]);
 
   useEffect(() => {
     function onScroll() {
@@ -55,11 +89,7 @@ function MovieList() {
         document.documentElement.scrollHeight - 50
       ) {
         if (!isLoading) {
-          if (sort === "") {
-            getData();
-          } else {
-            getData(sort);
-          }
+          getData();
         }
       }
     }
@@ -72,6 +102,21 @@ function MovieList() {
   return (
     <>
       <SortMovies sort={sort} onChangeSort={onChangeSort} />
+      <Title title="필터" />
+      <>
+        <Filter
+          title="품질"
+          value={quality}
+          onChange={onChangeQuality}
+          options={qualityList}
+        />
+        <Filter
+          title="평점"
+          value={minimumRating}
+          onChange={onChangeMinimumRating}
+          options={ratingList}
+        />
+      </>
       <List
         dataSource={movies}
         renderItem={(movie) => (
