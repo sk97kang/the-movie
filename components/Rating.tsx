@@ -16,7 +16,7 @@ type Props = {
 function Rating({ disabled, value }: Props) {
   return (
     <Container>
-      <Rate disabled={disabled} value={value / 2} />
+      <Rate disabled={disabled} value={value / 2} /> {` (${value})`}
     </Container>
   );
 }

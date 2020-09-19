@@ -1,4 +1,4 @@
-import { List } from "antd";
+import { List, Space } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React, { useEffect, useState } from "react";
 import { Movie } from "../interfaces";
@@ -7,16 +7,7 @@ import Filter from "./Filter";
 import MovieItem from "./MovieItem";
 import SortMovies from "./SortMovies";
 
-import styled from "styled-components";
 import Title from "./Title";
-
-const FilterContainer = styled.div`
-  display: flex;
-
-  & > div {
-    margin-right: 10px;
-  }
-`;
 
 const qualityList = ["All", "720p", "1080p", "2160p", "3D"];
 const ratingList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -103,7 +94,7 @@ function MovieList() {
     <>
       <SortMovies sort={sort} onChangeSort={onChangeSort} />
       <Title title="필터" />
-      <>
+      <Space>
         <Filter
           title="품질"
           value={quality}
@@ -116,7 +107,7 @@ function MovieList() {
           onChange={onChangeMinimumRating}
           options={ratingList}
         />
-      </>
+      </Space>
       <List
         dataSource={movies}
         renderItem={(movie) => (
