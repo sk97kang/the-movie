@@ -1,6 +1,7 @@
-import { List, Space } from "antd";
+import { Button, List, message, Result, Space } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React, { useEffect, useState } from "react";
+import { CLICK_REFRESH, ERROR_MOVIES, NO_MOVIES } from "../common/messages";
 import { Movie } from "../interfaces";
 import { getMovies } from "../utils/api";
 import Filter from "./Filter";
@@ -47,18 +48,24 @@ function MovieList() {
       quality,
       minimumRating
     );
-    const movieArray: Movie[] = data.map((v: any) => ({
-      id: v.id,
-      title: v.title,
-      rating: v.rating,
-      summary: v.summary,
-      medium_cover_image: v.medium_cover_image,
-      year: v.year,
-    }));
-    if (!isClean) {
-      setMovies([...movies, ...movieArray]);
-    } else {
-      setMovies([...movieArray]);
+
+    if (data?.length > 0) {
+      const movieArray: Movie[] = data.map((v: any) => ({
+        id: v.id,
+        title: v.title,
+        rating: v.rating,
+        summary: v.summary,
+        medium_cover_image: v.medium_cover_image,
+        year: v.year,
+      }));
+      if (!isClean) {
+        setMovies([...movies, ...movieArray]);
+      } else {
+        setMovies([...movieArray]);
+      }
+    }
+    if (!data || data.length === 0) {
+      message.error(NO_MOVIES);
     }
     setError(error);
     setIsLoading(false);
@@ -89,6 +96,21 @@ function MovieList() {
       window.removeEventListener("scroll", onScroll);
     };
   }, [isLoading]);
+
+  if (error) {
+    return (
+      <Result
+        status="error"
+        title={ERROR_MOVIES}
+        subTitle={CLICK_REFRESH}
+        extra={[
+          <Button type="primary" onClick={() => getData(true)}>
+            새로 고침
+          </Button>,
+        ]}
+      />
+    );
+  }
 
   return (
     <>

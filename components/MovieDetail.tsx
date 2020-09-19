@@ -6,6 +6,8 @@ import styled from "styled-components";
 import Loading from "./Loading";
 import Rating from "./Rating";
 import Title from "./Title";
+import { Button, Result } from "antd";
+import { CLICK_REFRESH, ERROR_MOVIES } from "../common/messages";
 
 const Container = styled.div`
   display: flex;
@@ -49,16 +51,18 @@ function MovieDetailComp({ id }: Props) {
     setIsLoading(true);
     const [data, error] = await getMovie(Number(id));
 
-    const movieObj: MovieDetail = {
-      id: data.id,
-      rating: data.rating,
-      large_cover_image: data.large_cover_image,
-      title_long: data.title_long,
-      like_count: data.like_count,
-      download_count: data.download_count,
-      description_full: data.description_full,
-    };
-    setMovie(movieObj);
+    if (data) {
+      const movieObj: MovieDetail = {
+        id: data.id,
+        rating: data.rating,
+        large_cover_image: data.large_cover_image,
+        title_long: data.title_long,
+        like_count: data.like_count,
+        download_count: data.download_count,
+        description_full: data.description_full,
+      };
+      setMovie(movieObj);
+    }
     setError(error);
     setIsLoading(false);
   };
@@ -69,6 +73,21 @@ function MovieDetailComp({ id }: Props) {
 
   if (isLoading || movie == null) {
     return <Loading />;
+  }
+
+  if (error) {
+    return (
+      <Result
+        status="error"
+        title={ERROR_MOVIES}
+        subTitle={CLICK_REFRESH}
+        extra={[
+          <Button type="primary" onClick={() => getData()}>
+            새로 고침
+          </Button>,
+        ]}
+      />
+    );
   }
 
   return (
