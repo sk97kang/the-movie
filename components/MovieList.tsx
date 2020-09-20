@@ -1,4 +1,4 @@
-import { Button, List, message, Result, Space } from "antd";
+import { BackTop, Button, List, message, Result, Space } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
 import React, { useEffect, useState } from "react";
 import { CLICK_REFRESH, ERROR_MOVIES, NO_MOVIES } from "../common/messages";
@@ -139,6 +139,7 @@ function MovieList() {
         )}
         loading={isLoading}
       />
+      <BackTop />
     </>
   );
 }
