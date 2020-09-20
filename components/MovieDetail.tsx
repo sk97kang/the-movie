@@ -8,10 +8,12 @@ import Rating from "./Rating";
 import Title from "./Title";
 import { Button, Result } from "antd";
 import { CLICK_REFRESH, ERROR_MOVIES } from "../common/messages";
+import Link from "next/link";
 
 const Container = styled.div`
   display: flex;
   width: 100%;
+  margin-bottom: 20px;
 `;
 
 const Poster = styled.img`
@@ -37,6 +39,12 @@ const Download = styled.div`
 `;
 
 const Description = styled.div``;
+
+const BackButton = styled.a`
+  font-size: 16px;
+  color: #6bc8ff;
+  text-decoration: underline;
+`;
 
 type Props = {
   id: number;
@@ -91,18 +99,23 @@ function MovieDetailComp({ id }: Props) {
   }
 
   return (
-    <Container>
-      <Poster src={movie.large_cover_image} />
-      <Content>
-        <TopContent>
-          <Title title={movie.title_long} />
-          <Rating disabled value={movie.rating} />
-        </TopContent>
-        <Like>Like : {movie.like_count}</Like>
-        <Download>Download : {movie.download_count}</Download>
-        <Description>{movie.description_full}</Description>
-      </Content>
-    </Container>
+    <>
+      <Container>
+        <Poster src={movie.large_cover_image} />
+        <Content>
+          <TopContent>
+            <Title title={movie.title_long} />
+            <Rating disabled value={movie.rating} />
+          </TopContent>
+          <Like>Like : {movie.like_count}</Like>
+          <Download>Download : {movie.download_count}</Download>
+          <Description>{movie.description_full}</Description>
+        </Content>
+      </Container>
+      <Link href="/movies">
+        <BackButton>리스트로 돌아가기</BackButton>
+      </Link>
+    </>
   );
 }
 
