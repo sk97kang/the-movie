@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MovieDetail } from "../interfaces";
 import { getMovie } from "../utils/api";
 
@@ -48,16 +48,18 @@ const BackButton = styled.a`
 
 type Props = {
   id: number;
+  movie: MovieDetail;
+  error: string | null;
 };
 
-function MovieDetailComp({ id }: Props) {
-  const [movie, setMovie] = useState<MovieDetail | null>(null);
-  const [error, setError] = useState<string | null>(null);
+function MovieDetailComp(props: Props) {
+  const [movie, setMovie] = useState<MovieDetail | null>(props.movie);
+  const [error, setError] = useState<string | null>(props.error);
   const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
     setIsLoading(true);
-    const [data, error] = await getMovie(Number(id));
+    const [data, error] = await getMovie(props.id);
 
     if (data) {
       const movieObj: MovieDetail = {
@@ -74,10 +76,6 @@ function MovieDetailComp({ id }: Props) {
     setError(error);
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   if (isLoading || movie == null) {
     return <Loading />;

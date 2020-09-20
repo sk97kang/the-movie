@@ -13,10 +13,15 @@ import Title from "./Title";
 const qualityList = ["All", "720p", "1080p", "2160p", "3D"];
 const ratingList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-function MovieList() {
+type Props = {
+  movies: Movie[];
+  error: string | null;
+};
+
+function MovieList(props: Props) {
   const [init, setInit] = useState(false);
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [movies, setMovies] = useState<Movie[]>(props.movies);
+  const [error, setError] = useState<string | null>(props.error);
   const [isLoading, setIsLoading] = useState(false);
   const [sort, setSort] = useState("");
   const [quality, setQuality] = useState("All");
@@ -73,7 +78,6 @@ function MovieList() {
 
   useEffect(() => {
     if (!init) {
-      getData();
       setInit(true);
     } else {
       getData(true);
