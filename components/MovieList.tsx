@@ -132,8 +132,8 @@ function MovieList() {
       </Space>
       <List
         dataSource={movies}
-        renderItem={(movie) => (
-          <List.Item key={movie.id}>
+        renderItem={(movie, i) => (
+          <List.Item key={`${i}_${movie.id}`}>
             <MovieItem movie={movie} />
           </List.Item>
         )}

@@ -16,6 +16,16 @@ export const getMovies = async (
   minimumRating: string = "0",
   limit: number = 4
 ) => {
+  // console.log(
+  //   "page : ",
+  //   page,
+  //   "sort : ",
+  //   sort,
+  //   "quality : ",
+  //   quality,
+  //   "minimum_rating : ",
+  //   minimumRating
+  // );
   try {
     const {
       data: {
