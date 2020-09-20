@@ -3,14 +3,19 @@ import Link from "next/link";
 import Head from "next/head";
 
 import styled from "styled-components";
-import { Col, Menu, Row } from "antd";
+import { Col, Menu, Row, Space } from "antd";
+import Title from "./Title";
+import SubTitle from "./SubTitle";
 
 const Content = styled(Col)`
   padding: 30px 10px;
 `;
 
 const Footer = styled.footer`
-  height: 50px;
+  & > div {
+    margin-top: 10px;
+    width: 100%;
+  }
 `;
 
 type Props = {
@@ -36,7 +41,7 @@ const Layout = ({ children, title = "THE MOVIE" }: Props) => (
         </Link>
       </Menu.Item>
     </Menu>
-    <Row gutter={8}>
+    <Row>
       <Col xs={1} md={2} lg={4}></Col>
       <Content xs={22} md={20} lg={16}>
         {children}
@@ -45,7 +50,10 @@ const Layout = ({ children, title = "THE MOVIE" }: Props) => (
     </Row>
     <Footer>
       <hr />
-      <span>The Movie</span>
+      <Space align="center" direction="vertical">
+        <Title title="THE MOVIE" />
+        <SubTitle text="made by Kyu" />
+      </Space>
     </Footer>
   </>
 );
