@@ -15,7 +15,7 @@ function MoviePage({ movie, error }: Props) {
   const router = useRouter();
   const { id } = router.query;
   return (
-    <Layout>
+    <Layout title={`${movie.title_long} | THE MOVIE`}>
       {id && <MovieDetailComp id={Number(id)} movie={movie} error={error} />}
     </Layout>
   );

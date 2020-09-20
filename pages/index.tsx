@@ -23,7 +23,7 @@ const devDependencies = [
 
 function IndexPage() {
   return (
-    <Layout>
+    <Layout title="HOME | THE MOVIE">
       <>
         <Title title="사용된 라이브러리 및 프레임 워크" />
         <Divider orientation="left">Dependencies</Divider>

@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 import styled from "styled-components";
 import { Col, Menu, Row } from "antd";
@@ -13,11 +14,16 @@ const Footer = styled.footer`
 `;
 
 type Props = {
+  title: string;
   children?: ReactNode;
 };
 
-const Layout = ({ children }: Props) => (
-  <div>
+const Layout = ({ children, title = "THE MOVIE" }: Props) => (
+  <>
+    <Head>
+      <title>{title}</title>
+      <meta charSet="utf-8" />
+    </Head>
     <Menu mode="horizontal" theme="dark">
       <Menu.Item>
         <Link href="/">
@@ -41,7 +47,7 @@ const Layout = ({ children }: Props) => (
       <hr />
       <span>The Movie</span>
     </Footer>
-  </div>
+  </>
 );
 
 export default Layout;

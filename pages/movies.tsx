@@ -12,7 +12,7 @@ type Props = {
 
 function MoviesPage({ movies, error }: Props) {
   return (
-    <Layout>
+    <Layout title="MOVIES | THE MOVIE">
       <MovieList movies={movies} error={error} />
     </Layout>
   );
