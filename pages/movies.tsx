@@ -1,8 +1,9 @@
 import { GetServerSideProps } from "next";
-import Layout from "../components/Layout";
-import MovieList from "../components/MovieList";
+
 import { Movie } from "../interfaces";
 import { getMovies } from "../utils/api";
+import Layout from "../components/Layout";
+import MovieList from "../components/MovieList";
 
 type Props = {
   movies: Movie[];

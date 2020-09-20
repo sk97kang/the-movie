@@ -1,9 +1,10 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+
+import { getMovie } from "../../utils/api";
+import { MovieDetail } from "../../interfaces";
 import Layout from "../../components/Layout";
 import MovieDetailComp from "../../components/MovieDetail";
-import { MovieDetail } from "../../interfaces";
-import { getMovie } from "../../utils/api";
 
 type Props = {
   movie: MovieDetail;

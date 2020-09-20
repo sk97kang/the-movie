@@ -1,5 +1,7 @@
-import { Divider, List } from "antd";
 import { GetStaticProps } from "next";
+
+import { Divider, List } from "antd";
+
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 

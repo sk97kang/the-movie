@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { MovieDetail } from "../interfaces";
-import { getMovie } from "../utils/api";
+import Link from "next/link";
 
 import styled from "styled-components";
-import Loading from "./Loading";
-import Rating from "./Rating";
-import Title from "./Title";
 import { Button, Result } from "antd";
+
+import { MovieDetail } from "../interfaces";
+import { getMovie } from "../utils/api";
 import { CLICK_REFRESH, ERROR_MOVIES } from "../common/messages";
-import Link from "next/link";
+import Loading from "./Loading";
+import Title from "./Title";
+import Rating from "./Rating";
 
 const Container = styled.div`
   display: flex;

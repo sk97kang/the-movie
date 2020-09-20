@@ -1,8 +1,9 @@
 import React from "react";
-import { Movie } from "../interfaces";
+import Link from "next/link";
 
 import styled from "styled-components";
-import Link from "next/link";
+
+import { Movie } from "../interfaces";
 import Title from "./Title";
 import Rating from "./Rating";
 import Year from "./Year";

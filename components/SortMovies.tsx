@@ -2,8 +2,9 @@ import React from "react";
 
 import styled from "styled-components";
 import { Radio } from "antd";
-import Title from "./Title";
 import { RadioChangeEvent } from "antd/lib/radio";
+
+import Title from "./Title";
 
 const Container = styled.div`
   margin-bottom: 30px;

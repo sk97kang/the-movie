@@ -1,14 +1,15 @@
+import React, { useEffect, useState } from "react";
+
+import { CLICK_REFRESH, ERROR_MOVIES, NO_MOVIES } from "../common/messages";
 import { BackTop, Button, List, message, Result, Space } from "antd";
 import { RadioChangeEvent } from "antd/lib/radio";
-import React, { useEffect, useState } from "react";
-import { CLICK_REFRESH, ERROR_MOVIES, NO_MOVIES } from "../common/messages";
+
 import { Movie } from "../interfaces";
 import { getMovies } from "../utils/api";
+import Title from "./Title";
 import Filter from "./Filter";
 import MovieItem from "./MovieItem";
 import SortMovies from "./SortMovies";
-
-import Title from "./Title";
 
 const qualityList = ["All", "720p", "1080p", "2160p", "3D"];
 const ratingList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
